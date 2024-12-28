@@ -10,54 +10,42 @@ function App() {
   const { value, inWord } = useSelector((state) => state.counter);
   const dispatch = useDispatch();
 
-  // key : 4661ce2f-b369-463c-bbc3-6e20ea8d13be
+  const useGenerateRandomColor = () => {
+    const [color, setColor] = useState("");
+    const generateColor = () => {
+      setColor(Math.random().toString(16).substr(-6));
+    };
+    return { color, generateColor };
+  };
 
-  // const apiKey = "4661ce2f-b369-463c-bbc3-6e20ea8d13be";
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://api.apiverve.com/v1/numbertowords?number=${count}`,
-  //         { method: "GET", headers: { "x-api-key": apiKey } }
-  //       );
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! status: ${response.status}`);
-  //       }
-  //       const result = await response.json();
-  //       console.log(result.data.words);
-
-  //       setData(result.data.words);
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [count]);
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
+  const { color, generateColor } = useGenerateRandomColor();
 
   return (
-    <div className="bg-slate-100 h-screen flex flex-col justify-center items-center">
+    <div
+      className="h-screen flex flex-col justify-center items-center"
+      style={{
+        backgroundColor: "#" + color,
+      }}
+    >
       <div className="flex justify-center">
         <p className="text-4xl p-5">{value}</p>
       </div>
       <div className="flex justify-center gap-2">
         <button
           className="py-3 px-8 bg-black text-white hover:border hover:border-black hover:text-black hover:bg-slate-100 duration-300"
-          onClick={() => dispatch(increment())}
+          onClick={() => {
+            dispatch(increment());
+            generateColor();
+          }}
         >
           Increment
         </button>
         <button
           className="py-3 px-8 bg-black text-white hover:border hover:border-black hover:text-black hover:bg-slate-100 duration-300"
-          onClick={() => dispatch(decrement())}
+          onClick={() => {
+            dispatch(decrement());
+            generateColor();
+          }}
         >
           Decrement
         </button>
