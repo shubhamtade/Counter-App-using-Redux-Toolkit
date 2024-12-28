@@ -50,10 +50,8 @@ function App() {
           Decrement
         </button>
       </div>
-      <div className="flex justify-center">
-        <p className="text-4xl p-5 uppercase">
-          {inWord ? inWord : "No data found"}
-        </p>
+      <div className="flex justify-center text-center">
+        <p className="text-4xl p-5 uppercase">{value ? inWord : "Zero"}</p>
       </div>
     </div>
   );
